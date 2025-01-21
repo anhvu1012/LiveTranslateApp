@@ -1,33 +1,36 @@
 import React, { useState, useLayoutEffect, useContext } from 'react';
-import { View, Text, Button, TouchableOpacity, StyleSheet } from 'react-native';
-import { EvilIcons } from '@expo/vector-icons';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { EvilIcons, AntDesign } from '@expo/vector-icons';
 import SettingsScreen from '../screens/SettingsScreen';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import themeContext from '../constants/ThemesContext';
-
 const StartScreen = ({ navigation }) => {
-  const {theme} = useContext(themeContext);
-
+  /*
   useLayoutEffect(() => {
       navigation.setOptions({
           headerRight: () => (
-            <EvilIcons.Button
-            name='gear'
-            backgroundColor={'white'}
-            color={'black'}
-            size={30}
-            onPress={handleSettingsPress}
-          />
+            <TouchableOpacity>
+              <EvilIcons
+              name='gear'
+              backgroundColor={'white'}
+              color={'black'}
+              size={30}
+              onPress={handleSettingsPress}
+            />
+          </TouchableOpacity>
           )
       });
     }, [navigation]);
-
+    */
     const [isModalVisible, setModalVisible] = useState(false);
 
     const handleCameraPress = () => {
         navigation.navigate('Camera');
     };
+
+    const imagePickerHandle = () => {
+      navigation.navigate('Picture Select');
+     };
 
     const handleSettingsPress = () => {
         setModalVisible(true);
@@ -42,14 +45,22 @@ const StartScreen = ({ navigation }) => {
       <View style={styles.textContainer}>
         <Text style={styles.text}>Welcome to Live Text Translate!</Text>
       </View>
-      <View style={styles.iconContainer}>
-        <EvilIcons.Button 
+      <TouchableOpacity style={styles.iconContainer}>
+        <EvilIcons
           name='camera' 
           backgroundColor={'white'}
           color={'black'}
           size={80}
           onPress={handleCameraPress}/>
-      </View>
+
+        <AntDesign
+          name='picture' 
+          backgroundColor={'white'}
+          color={'black'}
+          size={50}
+          onPress={imagePickerHandle}/>
+
+      </TouchableOpacity>
       <SettingsScreen  isVisible={isModalVisible} closeModal={closeModal} />
     </SafeAreaView>
   );
@@ -68,11 +79,12 @@ const styles = StyleSheet.create({
     },
 
     iconContainer: {
-      
+      flexDirection: 'row'
     },
 
     text:{
-      fontSize: 24
+      fontSize: 24,
+      //fontFamily: 'Lato'
     },
   });
 

@@ -30,6 +30,7 @@ const HomeTabNavigator = () => {
             <NavigationContainer theme={isDarkMode === true ? DarkTheme : DefaultTheme}>
                 <Tab.Navigator
                     screenOptions={({ route }) => ({
+                        //tabBarActiveBackgroundColor: 'tomato',
                         headerShown: false,
                         tabBarActiveTintColor: '#ff9933',
                         tabBarInactiveTintColor: 'gray',
@@ -39,9 +40,9 @@ const HomeTabNavigator = () => {
                         if (route.name === 'Home') {
                             iconName = 'ios-home';
                         }else if (route.name === 'History') {
-                        iconName = 'time-outline';
+                            iconName = 'time-outline';
                         } else if (route.name === 'Favorites') {
-                        iconName = focused ? 'ios-star' : 'ios-star-outline';
+                            iconName = focused ? 'ios-star' : 'ios-star-outline';
                         }
             
                         return <Ionicons name={iconName} size={size} color={color} />;
@@ -49,8 +50,8 @@ const HomeTabNavigator = () => {
                     })}
                 >
                     <Tab.Screen name="Home" component={AppNavigator} />
-                    <Tab.Screen name="History" component={HistoryScreen} options={{headerShown:true}}/>
                     <Tab.Screen name="Favorites" component={FavoritesScreen} options={{headerShown:true}}/>
+                    <Tab.Screen name="History" component={HistoryScreen} options={{headerShown:true}}/>
                 </Tab.Navigator>
             </NavigationContainer>
         </themeContext.Provider>
